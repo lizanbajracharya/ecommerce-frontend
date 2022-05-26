@@ -24,6 +24,7 @@ const ProductForm = ({ open, handleClose }) => {
         <Button
           type="submit"
           variant="contained"
+          id="submitButton"
           color="primary"
           style={buttonStyle}
           disabled={!(formik.isValid && formik.dirty)}

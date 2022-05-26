@@ -6,10 +6,12 @@ export const items = [
     href: "/admin/dashboard",
     icon: <ChartBarIcon fontSize="small" />,
     title: "Dashboard",
+    id: "dashboardMenu",
   },
   {
     href: "/admin/products",
     icon: <CreditScoreIcon fontSize="small" />,
     title: "Product",
+    id: "productMenu",
   },
 ];

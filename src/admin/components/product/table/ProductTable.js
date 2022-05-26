@@ -24,7 +24,7 @@ const ProductTable = () => {
         columns={columns}
         actions={[
           {
-            icon: () => <AddIcon />,
+            icon: () => <AddIcon id="addProduct" />,
             tooltip: "Add Product",
             onClick: (event, rowData) => handleOpen(),
             isFreeAction: true,

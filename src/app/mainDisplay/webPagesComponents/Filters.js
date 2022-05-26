@@ -60,6 +60,7 @@ const Filters = ({ setSortValue, setFilterType }) => {
         <div className="form-control">
           <input
             type="text"
+            id="search"
             name="search"
             value={search}
             placeholder="search"
@@ -72,6 +73,7 @@ const Filters = ({ setSortValue, setFilterType }) => {
           <div>
             <select
               name="brand"
+              id="brand"
               value={brand}
               onChange={updateFilters}
               className="company">
@@ -90,6 +92,7 @@ const Filters = ({ setSortValue, setFilterType }) => {
           <h5>color</h5>
           <select
             name="color"
+            id="color"
             value={color}
             onChange={updateFilters}
             className="company">
@@ -109,6 +112,7 @@ const Filters = ({ setSortValue, setFilterType }) => {
           <p className="price">{formatPrice(price)}</p>
           <input
             name="price"
+            id="price"
             type={"range"}
             style={{ height: "30px" }}
             onChange={updateFilters}
@@ -118,7 +122,11 @@ const Filters = ({ setSortValue, setFilterType }) => {
           />
         </div>
         {/* end of price */}
-        <button type="button" className="clear-btn" onClick={clearFilters}>
+        <button
+          type="button"
+          id="clearButton"
+          className="clear-btn"
+          onClick={clearFilters}>
           clear filters
         </button>
       </div>

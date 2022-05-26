@@ -68,6 +68,7 @@ const Sidebar = (props) => {
           {items.map((item) => (
             <NavItem
               key={item.title}
+              id={item.id}
               icon={item.icon}
               href={item.href}
               title={item.title}
