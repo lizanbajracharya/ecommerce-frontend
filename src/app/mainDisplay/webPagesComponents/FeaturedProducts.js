@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useGetProducts } from "../hooks/api/useProduct";
+import Product from "./Product";
 
 const FeaturedProducts = () => {
+  const { data } = useGetProducts();
+
   return (
     <Wrapper className="section">
       <div className="title">
@@ -10,9 +14,9 @@ const FeaturedProducts = () => {
         <div className="underline"></div>
       </div>
       <div className="section-center featured">
-        {/* {featured.slice(0, 3).map((product) => {
-          return <Product key={product.id} {...product} />
-        })} */}
+        {data?.products.slice(0, 3).map((product) => {
+          return <Product key={product._id} {...product} />;
+        })}
       </div>
       <Link to="/products" className="btn">
         all products

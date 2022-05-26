@@ -1,19 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "../../../assets/logo.svg";
+import logo from "../../../assets/vecteezy_cute-kawaii-portable-game-console-vector-illustration_7062890.jpg";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { links } from "../../../utils/constants";
 import CartButtons from "./CartButtons";
-const Nav = () => {
+const Nav = ({ openSidebar }) => {
   return (
     <NavContainer>
       <div className="nav-center">
         <div className="nav-header">
           <Link to="/">
-            <img src={logo} alt="comfy sloth" />
+            <img src={logo} style={{ height: "90px" }} alt="comfy sloth" />
           </Link>
-          <button type="button" className="nav-toggle">
+          <button type="button" className="nav-toggle" onClick={openSidebar}>
             <FaBars />
           </button>
         </div>

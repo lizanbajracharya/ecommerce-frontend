@@ -1,5 +1,5 @@
 import React from "react";
-import { FaShoppingCart, FaUserMinus, FaUserPlus } from "react-icons/fa";
+import { FaShoppingCart, FaUserPlus } from "react-icons/fa";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 const CartButton = () => {
@@ -25,7 +25,7 @@ const CartButton = () => {
       ) : ( */}
       <button
         type="button"
-        onClick={() => history.push("login")}
+        onClick={() => history.push("/login")}
         className="auth-btn">
         Login <FaUserPlus />
       </button>

@@ -10,7 +10,7 @@ import { useProductForm } from "../../../hooks/components/product/form/useProduc
 import ProductFormItem from "./item/ProductFormItem";
 
 const ProductForm = ({ open, handleClose }) => {
-  const { formik } = useProductForm();
+  const { formik, setImage } = useProductForm();
   const buttonStyle = {
     margin: "8px 0",
   };
@@ -18,7 +18,7 @@ const ProductForm = ({ open, handleClose }) => {
     <Dialog open={open} onClose={() => handleClose()}>
       <DialogTitle>Add Product</DialogTitle>
       <DialogContent>
-        <ProductFormItem formik={formik} />
+        <ProductFormItem formik={formik} setImage={setImage} />
       </DialogContent>
       <DialogActions>
         <Button
@@ -26,6 +26,7 @@ const ProductForm = ({ open, handleClose }) => {
           variant="contained"
           color="primary"
           style={buttonStyle}
+          disabled={!(formik.isValid && formik.dirty)}
           onClick={() => {
             formik.submitForm();
             handleClose();

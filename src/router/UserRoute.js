@@ -5,10 +5,10 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import AboutUs from "../app/mainDisplay/innerComponent/AboutUs";
-import MainPage from "../app/mainDisplay/innerComponent/MainPage";
-import ProductPage from "../app/mainDisplay/innerComponent/ProductPage";
 import HomePage from "../app/mainDisplay/mainWebPages/HomePage";
+import ProductsPage from "../app/mainDisplay/mainWebPages/ProductsPage";
+import SingleProductPage from "../app/mainDisplay/mainWebPages/SingleProductPage";
+import AboutPage from "../app/mainDisplay/mainWebPages/AboutPage";
 import Home from "../app/mainDisplay/pages/Home";
 import Login from "../auth/Login";
 import SignUp from "../auth/SignUp";
@@ -21,17 +21,15 @@ const UserRoute = () => {
           <Home>
             <Route exact path="/" render={() => <Redirect to="/home" />} />
             <Route exact path="/home" component={HomePage} />
-            <Route exact path="/products" component={ProductPage} />
-            <Route exact path="/search/:keyword" component={ProductPage} />
-            <Route exact path="/color/:color" component={ProductPage} />
-            <Route exact path="/brand/:brand" component={ProductPage} />
-            <Route exact path="/price/:price" component={ProductPage} />
-            <Route
-              exact
-              path="/products/keyword/:keyword/color/:color/brand/:brand/price/:price"
-              component={ProductPage}
-            />
-            <Route exact path="/aboutus" component={AboutUs} />
+            <Route exact path="/products" component={ProductsPage} />
+            <Route exact path="/products/:id" component={SingleProductPage} />
+            <Route exact path="/search/:keyword" component={ProductsPage} />
+            <Route exact path="/color/:color" component={ProductsPage} />
+            <Route exact path="/brand/:brand" component={ProductsPage} />
+            <Route exact path="/price/:price" component={ProductsPage} />
+            <Route exact path="/alphabetical/:alpha" component={ProductsPage} />
+            <Route exact path="/newOld/:asc" component={ProductsPage} />
+            <Route exact path="/about" component={AboutPage} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={SignUp} />
           </Home>

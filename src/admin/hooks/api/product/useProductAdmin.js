@@ -3,7 +3,11 @@ import { toast } from "react-toastify";
 import { createProduct, getProductAdmin } from "../../../api/product";
 
 export const useGetProductAdmin = () => {
-  return useQuery(["product"], () => getProductAdmin());
+  return useQuery(["product"], () => getProductAdmin(), {
+    cacheTime: 0,
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
 };
 
 export const usePostProduct = ({ onSuccess }) => {

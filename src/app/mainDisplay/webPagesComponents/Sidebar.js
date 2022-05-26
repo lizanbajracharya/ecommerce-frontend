@@ -6,13 +6,14 @@ import { links } from "../../../utils/constants";
 import styled from "styled-components";
 import CartButtons from "./CartButtons";
 
-const Sidebar = () => {
+const Sidebar = ({ isSideBarOpen, closeSidebar }) => {
   return (
     <SidebarContainer>
-      <aside className={`'sidebar show-sidebar'`}>
+      <aside
+        className={`${isSideBarOpen ? "sidebar show-sidebar" : "sidebar"}`}>
         <div className="sidebar-header">
           <img src={logo} className="logo" alt="coding addict" />
-          <button className="close-btn">
+          <button className="close-btn" onClick={closeSidebar}>
             <FaTimes />
           </button>
         </div>
