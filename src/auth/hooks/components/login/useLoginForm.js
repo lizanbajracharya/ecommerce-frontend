@@ -17,7 +17,6 @@ export const useLoginForm = () => {
   });
 
   const handleLogin = (values) => {
-    console.log(values);
     mutate(values);
   };
   return {

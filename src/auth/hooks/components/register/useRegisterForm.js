@@ -18,7 +18,6 @@ export const useRegisterForm = () => {
   });
 
   const handleRegister = (values) => {
-    console.log(values);
     mutate(values);
   };
   return {

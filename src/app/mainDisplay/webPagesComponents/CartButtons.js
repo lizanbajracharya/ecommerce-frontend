@@ -1,9 +1,15 @@
 import React from "react";
-import { FaShoppingCart, FaUserPlus } from "react-icons/fa";
+import { FaShoppingCart, FaUserMinus, FaUserPlus } from "react-icons/fa";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 const CartButton = () => {
   const history = useHistory();
+  const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
+
+  const handleLogout = () => {
+    localStorage.removeItem("loginInfo");
+    history.push("/home");
+  };
   return (
     <Wrapper className="cart-btn-wrapper">
       <Link to="/cart" className="cart-btn">
@@ -13,23 +19,22 @@ const CartButton = () => {
           {/* <span className="cart-value">{total_items}</span> */}
         </span>
       </Link>
-      {/* {myUser ? (
+      {loginInfo ? (
         <button
           type="button"
+          id="logoutButton"
           className="auth-btn"
-          onClick={() => {
-            localStorage.removeItem("user");
-          }}>
+          onClick={() => handleLogout()}>
           Logout <FaUserMinus />
         </button>
-      ) : ( */}
-      <button
-        type="button"
-        onClick={() => history.push("/login")}
-        className="auth-btn">
-        Login <FaUserPlus />
-      </button>
-      {/* )} */}
+      ) : (
+        <button
+          type="button"
+          onClick={() => history.push("/login")}
+          className="auth-btn">
+          Login <FaUserPlus />
+        </button>
+      )}
     </Wrapper>
   );
 };

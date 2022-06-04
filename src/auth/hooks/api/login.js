@@ -6,7 +6,6 @@ export const useLogin = ({ onSuccess }) => {
   return useMutation(["login"], (userData) => login(userData), {
     onSuccess: (data, variables, context) => {
       toast.success("Login Successful");
-      console.log(data?.isAdmin);
       localStorage.setItem("loginInfo", JSON.stringify(data));
 
       if (data?.isAdmin) {

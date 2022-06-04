@@ -3,6 +3,7 @@ import { axiosInstance } from "../../axiosInterceptor";
 
 export const getProductAdmin = async () => {
   const { data } = await axios.get("/api/products");
+
   return data;
 };
 

@@ -11,7 +11,6 @@ const ProtectedRoute = ({
   const history = useHistory();
 
   const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
-  console.log(loginInfo?.token);
 
   useEffect(() => {
     if (!loginInfo?.token) {
