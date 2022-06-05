@@ -2,6 +2,8 @@ import { useGetUserAdmin } from "../../../api/user/useUserAdmin";
 
 export const useUserTable = () => {
   const { data, isLoading, isError } = useGetUserAdmin();
+
+  const filterData = data?.data.filter((d) => d?.isAdmin === true);
   const columns = [
     {
       title: "ID",
@@ -23,7 +25,7 @@ export const useUserTable = () => {
   ];
   return {
     columns,
-    data,
+    filterData,
     isLoading,
     isError,
   };

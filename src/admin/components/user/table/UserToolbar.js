@@ -14,7 +14,7 @@ const UserToolbar = () => {
             m: -1,
           }}>
           <Typography sx={{ m: 1 }} variant="h4">
-            Users
+            Admins
           </Typography>
         </Box>
       </Box>

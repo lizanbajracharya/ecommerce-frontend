@@ -5,7 +5,7 @@ import { useUserTable } from "../../../hooks/components/user/table/useUserTable"
 import UserForm from "../form/UserForm";
 
 const UserTable = () => {
-  const { data, columns } = useUserTable();
+  const { filterData, columns } = useUserTable();
 
   const [open, setOpen] = useState(false);
 
@@ -20,7 +20,7 @@ const UserTable = () => {
     <>
       <MaterialTable
         title=""
-        data={data?.data}
+        data={filterData}
         columns={columns}
         actions={[
           {
