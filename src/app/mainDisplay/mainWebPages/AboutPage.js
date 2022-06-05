@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { PageHero } from "../webPagesComponents";
-import aboutImg from "../../../assets/download.jpg";
+import aboutImg from "../../../assets/285693802_715304896468675_625792164962586105_n.png";
 const AboutPage = () => {
   return (
     <main>

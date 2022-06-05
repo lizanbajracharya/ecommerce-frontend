@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import heroBcg from "../../../assets/download.jpg";
+import heroBcg from "../../../assets/285693802_715304896468675_625792164962586105_n.png";
 import heroBcg2 from "../../../assets/gadgets float over hand.jpg";
 const Hero = () => {
   return (

@@ -117,7 +117,7 @@ const Filters = ({ setSortValue, setFilterType }) => {
             style={{ height: "30px" }}
             onChange={updateFilters}
             min={0}
-            max={Number.MAX_SAFE_INTEGER}
+            max={100000000}
             value={price}
           />
         </div>

@@ -17,7 +17,7 @@ export const items = [
   {
     href: "/admin/users",
     icon: <GroupIcon fontSize="small" />,
-    title: "User",
+    title: "Admin",
     id: "userMenu",
   },
 ];
