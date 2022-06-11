@@ -22,6 +22,9 @@ const UserTable = () => {
         title=""
         data={filterData}
         columns={columns}
+        options={{
+          actionsColumnIndex: -1,
+        }}
         actions={[
           {
             icon: () => <AddIcon id="addAdmin" />,

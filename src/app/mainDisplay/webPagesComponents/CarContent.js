@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 import CartColumns from "./CartColumns";
 import CartItem from "./CartItem";
 import CartTotals from "./CartTotals";
-const CartItems = () => {
+const CartItems = ({ cart, clearCart }) => {
   return (
     <Wrapper className="section section-center">
       <CartColumns />
-      {/* {cart.map((item) => {
-        return <CartItem key={item.id} {...item} />
-      })} */}
+      {cart.map((item, index) => {
+        return <CartItem key={item._id} {...item} index={index} />;
+      })}
       <hr />
       <div className="link-container">
         <Link to="/products" className="link-btn">
@@ -19,8 +19,7 @@ const CartItems = () => {
         <button
           type="button"
           className="link-btn clear-btn"
-          // onClick={clearCart}
-        >
+          onClick={clearCart}>
           clear shopping cart
         </button>
       </div>

@@ -10,7 +10,8 @@ import { useProductForm } from "../../../hooks/components/product/form/useProduc
 import ProductFormItem from "./item/ProductFormItem";
 
 const ProductForm = ({ open, handleClose }) => {
-  const { formik, setImage } = useProductForm();
+  const { formik, setImage, colorList, brandList, setColor, color } =
+    useProductForm();
   const buttonStyle = {
     margin: "8px 0",
   };
@@ -18,7 +19,14 @@ const ProductForm = ({ open, handleClose }) => {
     <Dialog open={open} onClose={() => handleClose()}>
       <DialogTitle>Add Product</DialogTitle>
       <DialogContent>
-        <ProductFormItem formik={formik} setImage={setImage} />
+        <ProductFormItem
+          formik={formik}
+          setImage={setImage}
+          colorList={colorList}
+          brandList={brandList}
+          setColor={setColor}
+          color={color}
+        />
       </DialogContent>
       <DialogActions>
         <Button

@@ -22,6 +22,9 @@ const ProductTable = () => {
         title=""
         data={data?.products}
         columns={columns}
+        options={{
+          actionsColumnIndex: -1,
+        }}
         actions={[
           {
             icon: () => <AddIcon id="addProduct" />,

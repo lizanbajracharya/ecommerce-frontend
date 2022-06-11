@@ -3,12 +3,86 @@ import styled from "styled-components";
 import { formatPrice } from "../../../utils/helpers";
 import AmountButtons from "./AmountButtons";
 import { FaTrash } from "react-icons/fa";
-const CartItem = ({ id, image, name, color, price, amount }) => {
+import { useHistory } from "react-router-dom";
+const CartItem = ({
+  _id,
+  image,
+  name,
+  color,
+  price,
+  totalStock,
+  countInStock: amount,
+  index,
+}) => {
+  const history = useHistory();
+  const stockCalculate = () => {
+    let data = amount;
+    if (data < totalStock) {
+      data = data + 1;
+    } else {
+      data = totalStock;
+    }
+    return data;
+  };
+
+  const stockDecreaseCalculate = () => {
+    let data = amount;
+    if (data > 1) {
+      data = data - 1;
+    } else {
+      data = amount;
+    }
+    return data;
+  };
+
   const increase = () => {
-    // toggleAmount(id, "inc");
+    const stock = stockCalculate();
+    const productToStorage = JSON.parse(localStorage.getItem("cartItems"));
+    const filterProduct = {
+      name: name,
+      image: image,
+      totalStock: totalStock,
+      countInStock: stock,
+      price: price,
+      color: color,
+    };
+    productToStorage[index] = filterProduct;
+    localStorage.setItem("cartItems", JSON.stringify(productToStorage));
+    const subTotalFromStorage = localStorage.getItem("subTotal")
+      ? localStorage.getItem("subTotal")
+      : 0;
+
+    const subTotal = subTotalFromStorage
+      ? Number(subTotalFromStorage) + price
+      : price;
+    localStorage.setItem("subTotal", subTotal);
+    history.push("/cart");
   };
   const decrease = () => {
-    // toggleAmount(id, "dec");
+    const stock = stockDecreaseCalculate();
+
+    const productToStorage = JSON.parse(localStorage.getItem("cartItems"));
+    const filterProduct = {
+      name: name,
+      image: image,
+      totalStock: totalStock,
+      countInStock: stock,
+      price: price,
+      color: color,
+    };
+    productToStorage[index] = filterProduct;
+    localStorage.setItem("cartItems", JSON.stringify(productToStorage));
+    const subTotalFromStorage = localStorage.getItem("subTotal");
+    const subTotal = Number(subTotalFromStorage) - price;
+    localStorage.setItem("subTotal", subTotal);
+    history.push("/cart");
+  };
+
+  const removeItem = () => {
+    const productToStorage = JSON.parse(localStorage.getItem("cartItems"));
+    productToStorage.splice(index, 1);
+    localStorage.setItem("cartItems", JSON.stringify(productToStorage));
+    history.push("/cart");
   };
   return (
     <Wrapper>
@@ -24,12 +98,17 @@ const CartItem = ({ id, image, name, color, price, amount }) => {
         </div>
       </div>
       <h5 className="price">{formatPrice(price)}</h5>
-      <AmountButtons amount={amount} increase={increase} decrease={decrease} />
+      <AmountButtons
+        amount={amount}
+        increase={increase}
+        total={totalStock}
+        decrease={decrease}
+      />
       <h5 className="subtotal">{formatPrice(price * amount)}</h5>
       <button
         className="remove-btn"
-        // onClick={() => removeItem(id)}
-      >
+        id={"removeCartItem" + [index]}
+        onClick={() => removeItem()}>
         <FaTrash />
       </button>
     </Wrapper>

@@ -45,9 +45,9 @@ const NavContainer = styled.nav`
   justify-content: center;
 
   .nav-center {
-    width: 90vw;
+    width: 100vw;
     margin: 0 auto;
-    max-width: var(--max-width);
+    background-color: #fffdd0;
   }
   .nav-header {
     display: flex;

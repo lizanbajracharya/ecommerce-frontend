@@ -26,10 +26,14 @@ export const useProductTable = () => {
     {
       title: "Brand",
       field: "brand",
+      render: (rowData) => <span>{rowData?.brand?.name}</span>,
     },
     {
       title: "Color",
       field: "color",
+      render: (rowData) => (
+        <span>{rowData?.color.map((color) => color?.name + ",")}</span>
+      ),
     },
     {
       title: "Description",

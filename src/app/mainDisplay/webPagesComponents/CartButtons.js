@@ -5,7 +5,9 @@ import styled from "styled-components";
 const CartButton = () => {
   const history = useHistory();
   const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
-
+  const total_items = localStorage.getItem("cartItems")
+    ? JSON.parse(localStorage.getItem("cartItems"))
+    : [];
   const handleLogout = () => {
     localStorage.removeItem("loginInfo");
     history.push("/home");
@@ -16,7 +18,7 @@ const CartButton = () => {
         Cart
         <span className="cart-container">
           <FaShoppingCart />
-          {/* <span className="cart-value">{total_items}</span> */}
+          <span className="cart-value">{total_items.length}</span>
         </span>
       </Link>
       {loginInfo ? (

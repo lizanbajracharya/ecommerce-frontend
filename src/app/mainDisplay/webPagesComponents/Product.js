@@ -3,13 +3,13 @@ import styled from "styled-components";
 import { formatPrice } from "../../../utils/helpers";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
-const Product = ({ image, name, price, _id }) => {
+const Product = ({ image, name, price, _id, index }) => {
   return (
     <Wrapper>
       <div className="container">
         <img src={image} alt={name} />
         <Link to={`/products/${_id}`} className="link">
-          <FaSearch />
+          <FaSearch id={index} />
         </Link>
       </div>
       <footer>

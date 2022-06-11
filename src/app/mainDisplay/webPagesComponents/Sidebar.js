@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../../assets/logo.svg";
+import logo from "../../../assets/vecteezy_cute-kawaii-portable-game-console-vector-illustration_7062890.jpg";
 import { Link } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 import { links } from "../../../utils/constants";

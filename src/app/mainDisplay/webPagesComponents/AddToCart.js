@@ -2,10 +2,39 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import AmountButtons from "./AmountButtons";
+import { FaCheck } from "react-icons/fa";
+import { toast } from "react-toastify";
+
 const AddToCart = ({ product }) => {
   // add to cart
   const { countInStock: stock, color } = product;
   const [amount, setAmount] = useState(1);
+  const [mainColor, setMainColor] = useState(color[0]?.code);
+
+  const handleAddToCart = () => {
+    const productToStorage = localStorage.getItem("cartItems")
+      ? JSON.parse(localStorage.getItem("cartItems"))
+      : [];
+
+    const filterProduct = {
+      name: product?.name,
+      image: product?.image,
+      totalStock: product?.countInStock,
+      countInStock: amount,
+      price: product?.price,
+      color: mainColor,
+    };
+    productToStorage.push(filterProduct);
+    localStorage.setItem("cartItems", JSON.stringify(productToStorage));
+    const subTotalFromStorage = localStorage.getItem("subTotal")
+      ? localStorage.getItem("subTotal")
+      : 0;
+    const subTotal = subTotalFromStorage
+      ? Number(subTotalFromStorage) + amount * product?.price
+      : amount * product?.price;
+    localStorage.setItem("subTotal", subTotal);
+    toast.success("Item Added To Cart");
+  };
 
   const increase = () => {
     setAmount((oldAmount) => {
@@ -29,7 +58,21 @@ const AddToCart = ({ product }) => {
     <Wrapper>
       <div className="colors">
         <span>colors :</span>
-        <div>{color}</div>
+        <div>
+          {color.map((color, index) => {
+            return (
+              <button
+                key={index}
+                style={{ background: color?.code }}
+                className={`${
+                  mainColor === color?.code ? "color-btn active" : "color-btn"
+                }`}
+                onClick={() => setMainColor(color?.code)}>
+                {mainColor === color?.code ? <FaCheck /> : null}
+              </button>
+            );
+          })}
+        </div>
       </div>
       <div className="btn-container">
         <AmountButtons
@@ -41,8 +84,8 @@ const AddToCart = ({ product }) => {
         <Link
           to="/cart"
           className="btn"
-          // onClick={() => addToCart(id, mainColor, amount, product)}
-        >
+          id="addToCart"
+          onClick={() => handleAddToCart()}>
           add to cart
         </Link>
       </div>

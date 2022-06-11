@@ -1,13 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import { formatPrice } from "../../../utils/helpers";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 const CartTotals = () => {
+  const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
+  const shipping_fee = 100000;
+  const total_amount = localStorage.getItem("subTotal");
+  const history = useHistory();
   return (
     <Wrapper>
       <div>
         <article>
-          {/* <h5>
+          <h5>
             subtotal :<span>{formatPrice(total_amount)}</span>
           </h5>
           <p>
@@ -15,18 +19,19 @@ const CartTotals = () => {
           </p>
           <hr />
           <h4>
-            order total :<span>{formatPrice(total_amount + shipping_fee)}</span>
-          </h4> */}
+            order total :
+            <span>{formatPrice(Number(total_amount) + shipping_fee)}</span>
+          </h4>
         </article>
-        {/* {myUser ? (
-          <Link to='/checkout' className='btn'>
+        {loginInfo ? (
+          <Link to="/checkout" className="btn">
             proceed to checkout
           </Link>
         ) : (
-          <button onClick={loginWithRedirect} className='btn'>
+          <button onClick={() => history.push("/login")} className="btn">
             login
           </button>
-        )} */}
+        )}
       </div>
     </Wrapper>
   );

@@ -38,8 +38,8 @@ const Sort = ({
           className="sort-input">
           <option value="new">New</option>
           <option value="old">Old</option>
-          <option value="ascending">Name (A - Z)</option>
-          <option value="descending">Name (Z - A)</option>
+          <option value="descending">Name (A - Z)</option>
+          <option value="ascending">Name (Z - A)</option>
         </select>
       </form>
     </Wrapper>

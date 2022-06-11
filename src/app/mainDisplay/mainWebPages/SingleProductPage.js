@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { single_product_url as url } from "../../../utils/constants";
 import { formatPrice } from "../../../utils/helpers";
 import {
   Loading,
@@ -68,7 +67,7 @@ const SingleProductPage = () => {
             </p>
             <p className="info">
               <span>Brand :</span>
-              {brand}
+              {brand?.name}
             </p>
             <hr />
             {stock > 0 && <AddToCart product={data} />}

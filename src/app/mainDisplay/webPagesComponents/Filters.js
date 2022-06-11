@@ -1,28 +1,37 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useGetBrand } from "../../../admin/hooks/api/brand/useBrand";
+import { useGetColor } from "../../../admin/hooks/api/color/useGetColor";
 import { formatPrice } from "../../../utils/helpers";
-
-const colorMap = [
-  { value: "red", label: "Red" },
-  { value: "white", label: "White" },
-  { value: "green", label: "Green" },
-  { value: "grey", label: "Grey" },
-];
-const brandMap = [
-  { value: "samsung", label: "Samsung" },
-  { value: "apple", label: "Apple" },
-  { value: "google", label: "Google" },
-  { value: "sony", label: "Sony" },
-  { value: "microsoft", label: "Microsoft" },
-  { value: "nokia", label: "Nokia" },
-  { value: "oneplus", label: "OnePlus" },
-];
 
 const Filters = ({ setSortValue, setFilterType }) => {
   const [search, setSearch] = useState("");
   const [brand, setBrand] = useState("");
   const [color, setColor] = useState("");
   const [price, setPrice] = useState(0);
+
+  const { data: colorData } = useGetColor();
+  const { data: brandData } = useGetBrand();
+
+  const brandList =
+    brandData &&
+    brandData.map((brand) => {
+      return {
+        key: brand._id,
+        value: brand._id,
+        label: brand.name,
+      };
+    });
+
+  const colorList =
+    colorData &&
+    colorData.map((color) => {
+      return {
+        key: color._id,
+        value: color._id,
+        label: color.name,
+      };
+    });
 
   const updateFilters = (e) => {
     if (e.target.name === "search") {
@@ -78,13 +87,14 @@ const Filters = ({ setSortValue, setFilterType }) => {
               onChange={updateFilters}
               className="company">
               <option>Select</option>
-              {brandMap.map((c, index) => {
-                return (
-                  <option key={index} value={c.value}>
-                    {c.label}
-                  </option>
-                );
-              })}
+              {brandList &&
+                brandList.map((c, index) => {
+                  return (
+                    <option key={index} value={c.value}>
+                      {c.label}
+                    </option>
+                  );
+                })}
             </select>
           </div>
         </div>
@@ -97,13 +107,14 @@ const Filters = ({ setSortValue, setFilterType }) => {
             onChange={updateFilters}
             className="company">
             <option>Select</option>
-            {colorMap.map((c, index) => {
-              return (
-                <option key={index} value={c.value}>
-                  {c.label}
-                </option>
-              );
-            })}
+            {colorList &&
+              colorList.map((c, index) => {
+                return (
+                  <option key={index} value={c.value}>
+                    {c.label}
+                  </option>
+                );
+              })}
           </select>
         </div>
         {/* price */}

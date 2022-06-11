@@ -12,6 +12,7 @@ import AboutPage from "../app/mainDisplay/mainWebPages/AboutPage";
 import Home from "../app/mainDisplay/pages/Home";
 import Login from "../auth/Login";
 import SignUp from "../auth/SignUp";
+import CartPage from "../app/mainDisplay/mainWebPages/CartPage";
 
 const UserRoute = () => {
   return (
@@ -29,6 +30,7 @@ const UserRoute = () => {
             <Route exact path="/price/:price" component={ProductsPage} />
             <Route exact path="/alphabetical/:alpha" component={ProductsPage} />
             <Route exact path="/newOld/:asc" component={ProductsPage} />
+            <Route exact path="/cart" component={CartPage} />
             <Route exact path="/about" component={AboutPage} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={SignUp} />

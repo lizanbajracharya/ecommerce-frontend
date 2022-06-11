@@ -1,24 +1,37 @@
-import { InputLabel, TextField, MenuItem, Grid } from "@mui/material";
+import { InputLabel, TextField, MenuItem, Grid, Select } from "@mui/material";
 import axios from "axios";
 import React from "react";
+import OutlinedInput from "@mui/material/OutlinedInput";
 
-const colorMap = [
-  { value: "red", label: "Red" },
-  { value: "white", label: "White" },
-  { value: "green", label: "Green" },
-  { value: "grey", label: "Grey" },
-];
-const brandMap = [
-  { value: "samsung", label: "Samsung" },
-  { value: "apple", label: "Apple" },
-  { value: "google", label: "Google" },
-  { value: "sony", label: "Sony" },
-  { value: "microsoft", label: "Microsoft" },
-  { value: "nokia", label: "Nokia" },
-  { value: "oneplus", label: "OnePlus" },
-];
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
-const ProductFormItem = ({ formik, setImage }) => {
+const ProductFormItem = ({
+  formik,
+  setImage,
+  brandList,
+  colorList,
+  setColor,
+  color,
+}) => {
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setColor(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
+
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
@@ -91,33 +104,30 @@ const ProductFormItem = ({ formik, setImage }) => {
             onChange={formik.handleChange}
             error={formik.touched.brand && Boolean(formik.errors.brand)}
             helperText={formik.touched.brand && formik.errors.brand}>
-            {brandMap.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
+            {brandList.map((option) => (
+              <MenuItem key={option.key} value={option.value}>
                 {option.label}
               </MenuItem>
             ))}
           </TextField>
         </Grid>
         <Grid item xs={6}>
-          <TextField
-            margin="normal"
-            required
-            select
+          <InputLabel id="demo-multiple-name-label">Color</InputLabel>
+          <Select
+            labelId="demo-multiple-name-label"
+            id="demo-multiple-name"
+            multiple
             fullWidth
-            name="color"
-            label="Color"
-            id="color"
-            value={formik.values.color}
-            onChange={formik.handleChange}
-            error={formik.touched.color && Boolean(formik.errors.color)}
-            helperText={formik.touched.color && formik.errors.color}
-            autoComplete="current-color">
-            {colorMap.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
+            value={color}
+            onChange={handleChange}
+            input={<OutlinedInput label="Color" />}
+            MenuProps={MenuProps}>
+            {colorList.map((option) => (
+              <MenuItem key={option.key} value={option.value}>
                 {option.label}
               </MenuItem>
             ))}
-          </TextField>
+          </Select>
         </Grid>
       </Grid>
       <TextField
