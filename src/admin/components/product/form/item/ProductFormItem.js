@@ -104,11 +104,15 @@ const ProductFormItem = ({
             onChange={formik.handleChange}
             error={formik.touched.brand && Boolean(formik.errors.brand)}
             helperText={formik.touched.brand && formik.errors.brand}>
-            {brandList.map((option) => (
-              <MenuItem key={option.key} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
+            {brandList?.length > 0 ? (
+              brandList.map((option) => (
+                <MenuItem key={option.key} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))
+            ) : (
+              <MenuItem>No brand available</MenuItem>
+            )}
           </TextField>
         </Grid>
         <Grid item xs={6}>
@@ -122,11 +126,15 @@ const ProductFormItem = ({
             onChange={handleChange}
             input={<OutlinedInput label="Color" />}
             MenuProps={MenuProps}>
-            {colorList.map((option) => (
-              <MenuItem key={option.key} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
+            {colorList?.length > 0 ? (
+              colorList.map((option) => (
+                <MenuItem key={option.key} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))
+            ) : (
+              <MenuItem>No Color available</MenuItem>
+            )}
           </Select>
         </Grid>
       </Grid>

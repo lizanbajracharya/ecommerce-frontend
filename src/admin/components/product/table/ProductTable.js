@@ -27,7 +27,12 @@ const ProductTable = () => {
         }}
         actions={[
           {
-            icon: () => <AddIcon id="addProduct" />,
+            icon: () => (
+              <>
+                <AddIcon id="addProduct" />
+                ADD
+              </>
+            ),
             tooltip: "Add Product",
             onClick: (event, rowData) => handleOpen(),
             isFreeAction: true,
