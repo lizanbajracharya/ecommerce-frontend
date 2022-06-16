@@ -21,6 +21,7 @@ const ProductFormItem = ({
   colorList,
   setColor,
   color,
+  image,
 }) => {
   const handleChange = (event) => {
     const {
@@ -99,7 +100,6 @@ const ProductFormItem = ({
             label="Brand"
             name="brand"
             autoComplete="brand"
-            autoFocus
             value={formik.values.brand}
             onChange={formik.handleChange}
             error={formik.touched.brand && Boolean(formik.errors.brand)}
@@ -153,12 +153,15 @@ const ProductFormItem = ({
         helperText={formik.touched.countInStock && formik.errors.countInStock}
         autoComplete="current-countInStock"
       />
-      <InputLabel id="demo-simple-select-standard-label">Image</InputLabel>
+      <InputLabel id="demo-simple-select-standard-label">
+        Image {image && `:${image}`}
+      </InputLabel>
       <TextField
         margin="normal"
         required
         fullWidth
         id="image"
+        // value={image}
         name="image"
         autoFocus
         type={"file"}
@@ -175,7 +178,6 @@ const ProductFormItem = ({
         label="Description"
         name="description"
         autoComplete="description"
-        autoFocus
         value={formik.values.description}
         onChange={formik.handleChange}
         error={formik.touched.description && Boolean(formik.errors.description)}

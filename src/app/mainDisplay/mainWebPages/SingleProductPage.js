@@ -12,11 +12,21 @@ import {
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useGetProductById } from "../hooks/api/useProduct";
+import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
+import { Button } from "@mui/material";
+import { useProductToWishlist } from "../hooks/components/useProductToWishlist";
+// import BookmarkRemoveIcon from "@mui/icons-material/BookmarkRemove";
 const SingleProductPage = () => {
   const { id } = useParams();
   const history = useHistory();
 
   const { data, isLoading, isError } = useGetProductById(id);
+  const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
+  const {
+    handleAdd,
+    // , handleRemove
+  } = useProductToWishlist();
+
   useEffect(() => {
     if (isError) {
       setTimeout(() => {
@@ -42,7 +52,21 @@ const SingleProductPage = () => {
     _id: sku,
     brand,
     image,
+    wishList,
   } = data;
+
+  const filterData = wishList.filter((data) => data?.user === loginInfo?._id);
+
+  const handleAddWishlist = () => {
+    handleAdd(sku);
+    history.push(`/products/${sku}`);
+  };
+
+  // const handleRemoveWishlist = () => {
+  //   handleRemove(sku);
+  //   history.push(`/products/${sku}`);
+  // };
+
   return (
     <Wrapper>
       <PageHero title={name} product />
@@ -55,6 +79,21 @@ const SingleProductPage = () => {
           <section className="content">
             <h2>{name}</h2>
             <Stars stars={stars} reviews={reviews} />
+            {loginInfo &&
+              (filterData.length > 0 ? (
+                <>
+                  <span style={{ color: "green" }}>
+                    Already Added To WishList
+                  </span>
+                  {/* <Button onClick={() => handleRemoveWishlist()}>
+                    <BookmarkRemoveIcon />
+                  </Button> */}
+                </>
+              ) : (
+                <Button onClick={() => handleAddWishlist()}>
+                  <BookmarkAddIcon />
+                </Button>
+              ))}
             <h5 className="price">{formatPrice(price)}</h5>
             <p className="desc">{description}</p>
             <p className="info">

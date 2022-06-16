@@ -48,3 +48,17 @@ export const getProductByColor = async (color) => {
   );
   return response;
 };
+
+export const addProductToWishlist = async (productid) => {
+  const response = await axiosInstance.post(
+    `/api/products/${productid}/wishlist`
+  );
+  return response;
+};
+
+export const removeProductFromWishlist = async (productid) => {
+  const response = await axiosInstance.post(
+    `/api/products/${productid}/remove`
+  );
+  return response;
+};

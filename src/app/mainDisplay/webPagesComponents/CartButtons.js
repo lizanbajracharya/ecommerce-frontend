@@ -1,7 +1,17 @@
 import React from "react";
-import { FaShoppingCart, FaUserMinus, FaUserPlus } from "react-icons/fa";
+import { FaShoppingCart, FaUserPlus } from "react-icons/fa";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
+import Box from "@mui/material/Box";
+import Avatar from "@mui/material/Avatar";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import Logout from "@mui/icons-material/Logout";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+
 const CartButton = () => {
   const history = useHistory();
   const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
@@ -12,6 +22,16 @@ const CartButton = () => {
     localStorage.removeItem("loginInfo");
     history.push("/home");
   };
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Wrapper className="cart-btn-wrapper">
       <Link to="/cart" className="cart-btn">
@@ -22,13 +42,86 @@ const CartButton = () => {
         </span>
       </Link>
       {loginInfo ? (
-        <button
-          type="button"
-          id="logoutButton"
-          className="auth-btn"
-          onClick={() => handleLogout()}>
-          Logout <FaUserMinus />
-        </button>
+        <>
+          <Box
+            sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
+            <Tooltip title="Account settings">
+              <IconButton
+                onClick={handleClick}
+                size="small"
+                sx={{ ml: 2 }}
+                aria-controls={open ? "account-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}>
+                <Avatar sx={{ width: 32, height: 32 }}>U</Avatar>
+              </IconButton>
+            </Tooltip>
+          </Box>
+          <Menu
+            anchorEl={anchorEl}
+            id="account-menu"
+            open={open}
+            onClose={handleClose}
+            onClick={handleClose}
+            PaperProps={{
+              elevation: 0,
+              sx: {
+                overflow: "visible",
+                filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                mt: 1.5,
+                "& .MuiAvatar-root": {
+                  width: 32,
+                  height: 32,
+                  ml: -0.5,
+                  mr: 1,
+                },
+                "&:before": {
+                  content: '""',
+                  display: "block",
+                  position: "absolute",
+                  top: 0,
+                  right: 14,
+                  width: 10,
+                  height: 10,
+                  bgcolor: "background.paper",
+                  transform: "translateY(-50%) rotate(45deg)",
+                  zIndex: 0,
+                },
+              },
+            }}
+            transformOrigin={{ horizontal: "right", vertical: "top" }}
+            anchorOrigin={{ horizontal: "right", vertical: "bottom" }}>
+            <MenuItem>
+              <Avatar /> Profile
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <IconButton
+                  onClick={() => history.push("/wishlist")}
+                  id="wishList"
+                  sx={{ p: 0 }}>
+                  <ListItemIcon>
+                    <BookmarkIcon fontSize="small" />
+                  </ListItemIcon>
+                  <span style={{ fontSize: "15px" }}>Wishlist Product</span>
+                </IconButton>
+              </ListItemIcon>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <IconButton
+                  onClick={() => handleLogout()}
+                  id="logoutButton"
+                  sx={{ p: 0 }}>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  <span style={{ fontSize: "15px" }}>Logout</span>
+                </IconButton>
+              </ListItemIcon>
+            </MenuItem>
+          </Menu>
+        </>
       ) : (
         <button
           type="button"

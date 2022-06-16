@@ -1,4 +1,5 @@
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { toast } from "react-toastify";
 import {
   getProductFeatured,
   getProducts,
@@ -8,6 +9,8 @@ import {
   getProductByPrice,
   getProductByBrand,
   getProductByColor,
+  addProductToWishlist,
+  removeProductFromWishlist,
 } from "../../api/product";
 
 export const useGetProducts = () => {
@@ -42,4 +45,40 @@ export const useGetProductByBrand = (brand) => {
 
 export const useGetProductByColor = (color) => {
   return useQuery(["getProductByColor"], () => getProductByColor(color));
+};
+
+export const useAddProductToWishList = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    ["addProductToWishlist"],
+    (id) => addProductToWishlist(id),
+    {
+      onSuccess: (data, variables, context) => {
+        queryClient.invalidateQueries(["product"]);
+        toast.success("Succesfully Added Product To WishList");
+        onSuccess && onSuccess(data, variables, context);
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`error: ${err.message}`);
+      },
+    }
+  );
+};
+
+export const useRemoveProductFromWishList = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    ["removeProductFromWishlist"],
+    (id) => removeProductFromWishlist(id),
+    {
+      onSuccess: (data, variables, context) => {
+        queryClient.invalidateQueries(["product"]);
+        toast.success("Succesfully Removed Product To WishList");
+        onSuccess && onSuccess(data, variables, context);
+      },
+      onError: (err, _variables, _context) => {
+        toast.error(`error: ${err.message}`);
+      },
+    }
+  );
 };

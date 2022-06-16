@@ -2,11 +2,15 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import { useGetBrand } from "../../../api/brand/useBrand";
 import { useGetColor } from "../../../api/color/useGetColor";
-import { usePostProduct } from "../../../api/product/useProductAdmin";
+import {
+  useDeleteProduct,
+  usePostProduct,
+} from "../../../api/product/useProductAdmin";
 import { productSchema } from "./productValidationSchema";
 
 export const useProductForm = () => {
   const { mutate } = usePostProduct({});
+  const { mutate: deleteMutate } = useDeleteProduct({});
   const { data: colorData } = useGetColor();
   const { data: brandData } = useGetBrand();
   const [image, setImage] = useState();
@@ -55,6 +59,10 @@ export const useProductForm = () => {
       };
     });
 
+  const handleDelete = (id) => {
+    deleteMutate(id);
+  };
+
   return {
     formik,
     setImage,
@@ -62,5 +70,7 @@ export const useProductForm = () => {
     colorList,
     setColor,
     color,
+    handleDelete,
+    image,
   };
 };

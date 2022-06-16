@@ -12,10 +12,13 @@ const Hero = () => {
           needed device
         </h1>
         <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto, at
-          sed omnis corporis doloremque possimus velit! Repudiandae nisi odit,
-          aperiam odio ducimus, obcaecati libero et quia tempora excepturi quis
-          alias?
+          For some years, purchasing electrical appliances has been the most
+          popular internet activity. With the rapid growth of electronic
+          inventions such as mobile phones, laptops, televisions, tablets, and
+          CCTV security cameras, as well as people's frequent access to the
+          internet, online marketplaces have become the go-to destination for
+          those looking for convenient and high-quality purchasing. You can
+          order the goods you desire at a reasonable cost.
         </p>
         <Link to="/products" className="btn hero-btn">
           shop now
