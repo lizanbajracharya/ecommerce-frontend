@@ -1,4 +1,11 @@
-import { InputLabel, TextField, MenuItem, Grid, Select } from "@mui/material";
+import {
+  InputLabel,
+  TextField,
+  MenuItem,
+  Grid,
+  Select,
+  FormControl,
+} from "@mui/material";
 import axios from "axios";
 import React from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -55,8 +62,7 @@ const ProductFormItem = ({
       console.error(error);
     }
   };
-  console.log(formik.errors);
-  console.log(formik.touched);
+
   return (
     <div>
       <Grid container spacing={2}>
@@ -119,26 +125,28 @@ const ProductFormItem = ({
           </TextField>
         </Grid>
         <Grid item xs={6}>
-          <InputLabel id="demo-multiple-name-label">Color</InputLabel>
-          <Select
-            labelId="demo-multiple-name-label"
-            id="demo-multiple-name"
-            multiple
-            fullWidth
-            value={color}
-            onChange={handleChange}
-            input={<OutlinedInput label="Color" />}
-            MenuProps={MenuProps}>
-            {colorList?.length > 0 ? (
-              colorList.map((option) => (
-                <MenuItem key={option.key} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))
-            ) : (
-              <MenuItem>No Color available</MenuItem>
-            )}
-          </Select>
+          <FormControl sx={{ mt: 2, width: "29ch" }} variant="outlined">
+            <InputLabel id="demo-multiple-name-label">Color</InputLabel>
+            <Select
+              labelId="demo-multiple-name-label"
+              id="demo-multiple-name"
+              multiple
+              fullWidth
+              value={color}
+              onChange={handleChange}
+              input={<OutlinedInput label="Color" />}
+              MenuProps={MenuProps}>
+              {colorList?.length > 0 ? (
+                colorList.map((option) => (
+                  <MenuItem key={option.key} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))
+              ) : (
+                <MenuItem>No Color available</MenuItem>
+              )}
+            </Select>
+          </FormControl>
         </Grid>
       </Grid>
       <TextField
