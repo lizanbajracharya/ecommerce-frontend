@@ -3,7 +3,11 @@ import { toast } from "react-toastify";
 import { createBrands, deleteBrand, getBrands } from "../../../api/brand";
 
 export const useGetBrand = () => {
-  return useQuery(["getBrand"], () => getBrands());
+  return useQuery(["getBrand"], () => getBrands(), {
+    cacheTime: 0,
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
 };
 
 export const useCreateBrand = ({ onSuccess }) => {

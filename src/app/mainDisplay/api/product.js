@@ -62,3 +62,8 @@ export const removeProductFromWishlist = async (productid) => {
   );
   return response;
 };
+
+export const getProductByWishlist = async () => {
+  const response = await axiosInstance.get(`/api/products/wishlist`);
+  return response;
+};

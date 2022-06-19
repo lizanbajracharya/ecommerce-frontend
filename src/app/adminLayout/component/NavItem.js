@@ -3,7 +3,7 @@ import { Box, Button, ListItem, Link } from "@mui/material";
 import { useHistory } from "react-router-dom";
 
 const NavItem = (props) => {
-  const { href, icon, title, ...others } = props;
+  const { href, icon, id, title, ...others } = props;
   const history = useHistory();
   const active = href ? history?.location.pathname === href : false;
 
@@ -24,6 +24,7 @@ const NavItem = (props) => {
         <Button
           startIcon={icon}
           disableRipple
+          id={id}
           sx={{
             backgroundColor: active ? "rgba(255,255,255, 0.08)" : undefined,
             borderRadius: 1,

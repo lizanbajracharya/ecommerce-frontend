@@ -22,7 +22,9 @@ const Nav = ({ openSidebar }) => {
             const { id, text, url } = link;
             return (
               <li key={id}>
-                <Link to={url}>{text}</Link>
+                <Link to={url} id={id}>
+                  {text}
+                </Link>
               </li>
             );
           })}

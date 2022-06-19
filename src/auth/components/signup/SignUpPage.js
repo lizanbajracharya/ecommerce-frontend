@@ -1,9 +1,28 @@
-import { Button, TextField } from "@mui/material";
+import {
+  Button,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  TextField,
+} from "@mui/material";
 import React from "react";
 import { useRegisterForm } from "../../hooks/components/register/useRegisterForm";
-
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 const SignUpPage = () => {
-  const { formik } = useRegisterForm();
+  const {
+    formik,
+    confirm,
+    password,
+    handleShowPassword,
+    handleConfirmPassword,
+    handlePassword,
+    handleShowConfirmPassword,
+    validation,
+    showPassword,
+    showConfirmPassword,
+  } = useRegisterForm();
   return (
     <div>
       <TextField
@@ -16,6 +35,7 @@ const SignUpPage = () => {
         autoFocus
         value={formik.values.name}
         onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
         error={formik.touched.name && Boolean(formik.errors.name)}
         helperText={formik.touched.name && formik.errors.name}
       />
@@ -26,25 +46,56 @@ const SignUpPage = () => {
         id="email"
         label="Email Address"
         name="email"
-        autoFocus
         value={formik.values.email}
+        onBlur={formik.handleBlur}
         onChange={formik.handleChange}
         error={formik.touched.email && Boolean(formik.errors.email)}
         helperText={formik.touched.email && formik.errors.email}
       />
-      <TextField
-        margin="normal"
-        required
-        fullWidth
+      {validation && <span style={{ color: "red" }}>{validation}</span>}
+      <InputLabel htmlFor="password">Password *</InputLabel>
+      <OutlinedInput
         name="password"
         label="Password"
-        type="password"
         id="password"
-        value={formik.values.password}
-        onChange={formik.handleChange}
-        error={formik.touched.password && Boolean(formik.errors.password)}
-        helperText={formik.touched.password && formik.errors.password}
-        autoComplete="current-password"
+        required
+        type={showPassword ? "text" : "password"}
+        value={password}
+        fullWidth
+        onChange={handlePassword}
+        endAdornment={
+          <InputAdornment position="end">
+            <IconButton
+              aria-label="toggle password visibility"
+              onClick={handleShowPassword}
+              onMouseDown={handleShowPassword}
+              edge="end">
+              {showPassword ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+          </InputAdornment>
+        }
+      />
+      <InputLabel htmlFor="confirmPassword">Confirm Password *</InputLabel>
+      <OutlinedInput
+        name="confirmPassword"
+        label="Confirm Password"
+        id="confirmPassword"
+        required
+        type={showConfirmPassword ? "text" : "password"}
+        value={confirm}
+        fullWidth
+        onChange={handleConfirmPassword}
+        endAdornment={
+          <InputAdornment position="end">
+            <IconButton
+              aria-label="toggle password visibility"
+              onClick={handleShowConfirmPassword}
+              onMouseDown={handleShowConfirmPassword}
+              edge="end">
+              {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+          </InputAdornment>
+        }
       />
       <Button
         onClick={() => formik.submitForm()}

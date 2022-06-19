@@ -55,7 +55,8 @@ const ProductFormItem = ({
       console.error(error);
     }
   };
-
+  console.log(formik.errors);
+  console.log(formik.touched);
   return (
     <div>
       <Grid container spacing={2}>
@@ -68,8 +69,8 @@ const ProductFormItem = ({
             label="Name"
             name="name"
             autoComplete="name"
-            autoFocus
             value={formik.values.name}
+            onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
@@ -84,6 +85,7 @@ const ProductFormItem = ({
             label="Price"
             id="price"
             value={formik.values.price}
+            onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             error={formik.touched.price && Boolean(formik.errors.price)}
             helperText={formik.touched.price && formik.errors.price}
@@ -100,6 +102,7 @@ const ProductFormItem = ({
             label="Brand"
             name="brand"
             autoComplete="brand"
+            onBlur={formik.handleBlur}
             value={formik.values.brand}
             onChange={formik.handleChange}
             error={formik.touched.brand && Boolean(formik.errors.brand)}
@@ -145,6 +148,7 @@ const ProductFormItem = ({
         name="countInStock"
         label="Quantity"
         id="countInStock"
+        onBlur={formik.handleBlur}
         value={formik.values.countInStock}
         onChange={formik.handleChange}
         error={
@@ -178,6 +182,7 @@ const ProductFormItem = ({
         label="Description"
         name="description"
         autoComplete="description"
+        onBlur={formik.handleBlur}
         value={formik.values.description}
         onChange={formik.handleChange}
         error={formik.touched.description && Boolean(formik.errors.description)}

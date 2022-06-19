@@ -15,6 +15,7 @@ const LoginPage = () => {
         name="email"
         autoComplete="email"
         autoFocus
+        onBlur={formik.handleBlur}
         value={formik.values.email}
         onChange={formik.handleChange}
         error={formik.touched.email && Boolean(formik.errors.email)}
@@ -29,6 +30,7 @@ const LoginPage = () => {
         type="password"
         id="password"
         value={formik.values.password}
+        onBlur={formik.handleBlur}
         onChange={formik.handleChange}
         error={formik.touched.password && Boolean(formik.errors.password)}
         helperText={formik.touched.password && formik.errors.password}

@@ -3,7 +3,11 @@ import { toast } from "react-toastify";
 import { createColors, deleteColor, getColors } from "../../../api/color";
 
 export const useGetColor = () => {
-  return useQuery(["getColors"], () => getColors());
+  return useQuery(["getColors"], () => getColors(), {
+    cacheTime: 0,
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
 };
 
 export const useCreateColor = ({ onSuccess }) => {

@@ -11,40 +11,83 @@ import {
   getProductByColor,
   addProductToWishlist,
   removeProductFromWishlist,
+  getProductByWishlist,
 } from "../../api/product";
 
 export const useGetProducts = () => {
-  return useQuery(["getProductFeatured"], () => getProductFeatured());
+  return useQuery(["getProductFeatured"], () => getProductFeatured(), {
+    cacheTime: 0,
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
 };
 
 export const useGetAllProducts = () => {
-  return useQuery(["getProducts"], () => getProducts());
+  return useQuery(["getProducts"], () => getProducts(), {
+    cacheTime: 0,
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useGetWishlistProduct = () => {
+  return useQuery(["getWishListProducts"], () => getProductByWishlist(), {
+    cacheTime: 0,
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
 };
 
 export const useGetProductById = (id) => {
-  return useQuery(["getProductById"], () => getProductById(id));
+  return useQuery(["getProductById"], () => getProductById(id), {
+    cacheTime: 0,
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
 };
 
 export const useGetProductByAlphabetical = (alpha) => {
-  return useQuery(["getProductByAlphabetical"], () =>
-    getProductByAphabetical(alpha)
+  return useQuery(
+    ["getProductByAlphabetical"],
+    () => getProductByAphabetical(alpha),
+    {
+      cacheTime: 0,
+      refetchInterval: false,
+      refetchOnWindowFocus: false,
+    }
   );
 };
 
 export const useGetProductByNewAndOld = (asc) => {
-  return useQuery(["getProductByNewAndOld"], () => getProductByNewAndOld(asc));
+  return useQuery(["getProductByNewAndOld"], () => getProductByNewAndOld(asc), {
+    cacheTime: 0,
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
 };
 
 export const useGetProductByPrice = (price) => {
-  return useQuery(["getProductByPrice"], () => getProductByPrice(price));
+  return useQuery(["getProductByPrice"], () => getProductByPrice(price), {
+    cacheTime: 0,
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
 };
 
 export const useGetProductByBrand = (brand) => {
-  return useQuery(["getProductByBrand"], () => getProductByBrand(brand));
+  return useQuery(["getProductByBrand"], () => getProductByBrand(brand), {
+    cacheTime: 0,
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
 };
 
 export const useGetProductByColor = (color) => {
-  return useQuery(["getProductByColor"], () => getProductByColor(color));
+  return useQuery(["getProductByColor"], () => getProductByColor(color), {
+    cacheTime: 0,
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
+  });
 };
 
 export const useAddProductToWishList = ({ onSuccess }) => {
@@ -55,6 +98,7 @@ export const useAddProductToWishList = ({ onSuccess }) => {
     {
       onSuccess: (data, variables, context) => {
         queryClient.invalidateQueries(["product"]);
+        queryClient.invalidateQueries(["getProductById"]);
         toast.success("Succesfully Added Product To WishList");
         onSuccess && onSuccess(data, variables, context);
       },
@@ -73,7 +117,10 @@ export const useRemoveProductFromWishList = ({ onSuccess }) => {
     {
       onSuccess: (data, variables, context) => {
         queryClient.invalidateQueries(["product"]);
-        toast.success("Succesfully Removed Product To WishList");
+        queryClient.invalidateQueries(["getProductById"]);
+        queryClient.invalidateQueries(["getWishListProducts"]);
+
+        toast.success("Succesfully Removed Product From WishList");
         onSuccess && onSuccess(data, variables, context);
       },
       onError: (err, _variables, _context) => {

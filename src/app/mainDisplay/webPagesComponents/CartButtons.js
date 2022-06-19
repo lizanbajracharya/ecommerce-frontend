@@ -49,6 +49,7 @@ const CartButton = () => {
               <IconButton
                 onClick={handleClick}
                 size="small"
+                id="avatar"
                 sx={{ ml: 2 }}
                 aria-controls={open ? "account-menu" : undefined}
                 aria-haspopup="true"
@@ -103,7 +104,7 @@ const CartButton = () => {
                   <ListItemIcon>
                     <BookmarkIcon fontSize="small" />
                   </ListItemIcon>
-                  <span style={{ fontSize: "15px" }}>Wishlist Product</span>
+                  <span style={{ fontSize: "17px" }}>Wishlist Product</span>
                 </IconButton>
               </ListItemIcon>
             </MenuItem>
@@ -116,7 +117,7 @@ const CartButton = () => {
                   <ListItemIcon>
                     <Logout fontSize="small" />
                   </ListItemIcon>
-                  <span style={{ fontSize: "15px" }}>Logout</span>
+                  <span style={{ fontSize: "17px" }}>Logout</span>
                 </IconButton>
               </ListItemIcon>
             </MenuItem>

@@ -13,6 +13,7 @@ import Home from "../app/mainDisplay/pages/Home";
 import Login from "../auth/Login";
 import SignUp from "../auth/SignUp";
 import CartPage from "../app/mainDisplay/mainWebPages/CartPage";
+import WishlistProduct from "../app/mainDisplay/mainWebPages/WishlistProduct";
 
 const UserRoute = () => {
   return (
@@ -34,6 +35,7 @@ const UserRoute = () => {
             <Route exact path="/about" component={AboutPage} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={SignUp} />
+            <Route exact path="/wishlist" component={WishlistProduct} />
           </Home>
         </Switch>
       </Router>
