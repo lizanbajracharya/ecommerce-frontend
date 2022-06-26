@@ -3,6 +3,8 @@ import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import GroupIcon from "@mui/icons-material/Group";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import BrandingWatermarkIcon from "@mui/icons-material/BrandingWatermark";
+import InventoryIcon from "@mui/icons-material/Inventory";
+
 export const items = [
   {
     href: "/admin/dashboard",
@@ -33,5 +35,11 @@ export const items = [
     icon: <BorderColorIcon fontSize="small" />,
     title: "Color",
     id: "colorMenu",
+  },
+  {
+    href: "/admin/orders",
+    icon: <InventoryIcon fontSize="small" />,
+    title: "Order",
+    id: "orderMenu",
   },
 ];

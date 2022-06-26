@@ -15,6 +15,7 @@ import { useGetProductById } from "../hooks/api/useProduct";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import { Button } from "@mui/material";
 import { useProductToWishlist } from "../hooks/components/useProductToWishlist";
+import Comment from "../webPagesComponents/Comment";
 
 const SingleProductPage = () => {
   const { id } = useParams();
@@ -50,6 +51,7 @@ const SingleProductPage = () => {
     brand,
     image,
     wishList,
+    reviews: comment,
   } = data;
 
   const filterData = wishList.filter((data) => data === loginInfo?._id);
@@ -106,6 +108,9 @@ const SingleProductPage = () => {
             <hr />
             {stock > 0 && <AddToCart product={data} />}
           </section>
+        </div>
+        <div style={{ marginTop: "10px" }}>
+          <Comment comment={comment} />
         </div>
       </div>
     </Wrapper>

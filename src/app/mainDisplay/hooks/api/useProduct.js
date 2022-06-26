@@ -12,6 +12,9 @@ import {
   addProductToWishlist,
   removeProductFromWishlist,
   getProductByWishlist,
+  postComment,
+  updateComment,
+  deleteComment,
 } from "../../api/product";
 
 export const useGetProducts = () => {
@@ -128,4 +131,52 @@ export const useRemoveProductFromWishList = ({ onSuccess }) => {
       },
     }
   );
+};
+
+export const usePostComment = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(["postComment"], (formData) => postComment(formData), {
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries(["product"]);
+      queryClient.invalidateQueries(["getProductById"]);
+
+      toast.success("Succesfully Added A Comment");
+      onSuccess && onSuccess(data, variables, context);
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`error: ${err.message}`);
+    },
+  });
+};
+
+export const useUpdateComment = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(["updateComment"], (formData) => updateComment(formData), {
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries(["product"]);
+      queryClient.invalidateQueries(["getProductById"]);
+
+      toast.success("Succesfully update your comment");
+      onSuccess && onSuccess(data, variables, context);
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`error: ${err.message}`);
+    },
+  });
+};
+
+export const useDeleteComment = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(["deleteComment"], (id) => deleteComment(id), {
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries(["product"]);
+      queryClient.invalidateQueries(["getProductById"]);
+
+      toast.success("Succesfully Removed Your Comment");
+      onSuccess && onSuccess(data, variables, context);
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`error: ${err.message}`);
+    },
+  });
 };

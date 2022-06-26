@@ -17,6 +17,7 @@ const AddToCart = ({ product }) => {
       : [];
 
     const filterProduct = {
+      product: product?._id,
       name: product?.name,
       image: product?.image,
       totalStock: product?.countInStock,

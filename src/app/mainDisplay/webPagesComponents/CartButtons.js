@@ -11,6 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
+import InventoryIcon from "@mui/icons-material/Inventory";
 
 const CartButton = () => {
   const history = useHistory();
@@ -93,7 +94,17 @@ const CartButton = () => {
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}>
             <MenuItem>
-              <Avatar /> Profile
+              <ListItemIcon>
+                <IconButton
+                  onClick={() => history.push("/profile")}
+                  id="profile"
+                  sx={{ p: 0 }}>
+                  <ListItemIcon>
+                    <Avatar />
+                  </ListItemIcon>
+                  <span style={{ fontSize: "17px" }}>Profile</span>
+                </IconButton>
+              </ListItemIcon>
             </MenuItem>
             <MenuItem>
               <ListItemIcon>
@@ -105,6 +116,19 @@ const CartButton = () => {
                     <BookmarkIcon fontSize="small" />
                   </ListItemIcon>
                   <span style={{ fontSize: "17px" }}>Wishlist Product</span>
+                </IconButton>
+              </ListItemIcon>
+            </MenuItem>
+            <MenuItem>
+              <ListItemIcon>
+                <IconButton
+                  onClick={() => history.push("/orderlist")}
+                  id="orderlist"
+                  sx={{ p: 0 }}>
+                  <ListItemIcon>
+                    <InventoryIcon fontSize="small" />
+                  </ListItemIcon>
+                  <span style={{ fontSize: "17px" }}>Order List</span>
                 </IconButton>
               </ListItemIcon>
             </MenuItem>

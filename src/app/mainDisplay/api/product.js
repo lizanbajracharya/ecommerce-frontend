@@ -67,3 +67,24 @@ export const getProductByWishlist = async () => {
   const response = await axiosInstance.get(`/api/products/wishlist`);
   return response;
 };
+
+export const postComment = async (formData) => {
+  const response = await axiosInstance.post(
+    `/api/products/${formData?.id}/reviews`,
+    formData
+  );
+  return response;
+};
+
+export const updateComment = async (formData) => {
+  const response = await axiosInstance.put(
+    `/api/products/${formData?.id}/reviews`,
+    formData
+  );
+  return response;
+};
+
+export const deleteComment = async (id) => {
+  const response = await axiosInstance.delete(`/api/products/${id}/reviews`);
+  return response;
+};

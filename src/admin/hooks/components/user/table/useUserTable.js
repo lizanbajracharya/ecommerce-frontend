@@ -4,6 +4,7 @@ export const useUserTable = () => {
   const { data, isLoading, isError } = useGetUserAdmin();
 
   const filterData = data?.data.filter((d) => d?.isAdmin === true);
+  const filterDataUser = data?.data.filter((d) => d?.isAdmin !== true);
   const columns = [
     {
       title: "ID",
@@ -28,5 +29,6 @@ export const useUserTable = () => {
     filterData,
     isLoading,
     isError,
+    filterDataUser,
   };
 };

@@ -24,8 +24,8 @@ const CartTotals = () => {
           </h4>
         </article>
         {loginInfo ? (
-          <Link to="/checkout" className="btn">
-            proceed to checkout
+          <Link to="/shipping" id="shippingButton" className="btn">
+            proceed to shipping
           </Link>
         ) : (
           <button onClick={() => history.push("/login")} className="btn">

@@ -17,7 +17,7 @@ export const useLogin = ({ onSuccess }) => {
       onSuccess && onSuccess(data, variables, context);
     },
     onError: (err, _variables, _context) => {
-      toast.error(err.message);
+      toast.error(err.response.data.message);
     },
   });
 };
