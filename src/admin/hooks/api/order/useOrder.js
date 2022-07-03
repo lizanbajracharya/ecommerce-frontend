@@ -15,7 +15,7 @@ export const useGetOrderList = () => {
 };
 
 export const useGetOrderItemById = (id) => {
-  return useQuery(["getOrderItemById"], () => getOrderItemById(), {
+  return useQuery(["getOrderItemById"], () => getOrderItemById(id), {
     cacheTime: 0,
     refetchInterval: false,
     refetchOnWindowFocus: false,

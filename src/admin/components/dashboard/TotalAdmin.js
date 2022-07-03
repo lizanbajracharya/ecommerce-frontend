@@ -1,17 +1,18 @@
 import React from "react";
-import InventoryIcon from "@mui/icons-material/Inventory";
 import {
   Avatar,
   Button,
   Card,
   CardContent,
-  CircularProgress,
   Grid,
   Paper,
   Typography,
 } from "@mui/material";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useHistory } from "react-router-dom";
-const TotalOrderItem = ({ countOrder }) => {
+
+const TotalAdmin = ({ admin }) => {
   const history = useHistory();
   return (
     <div>
@@ -27,21 +28,21 @@ const TotalOrderItem = ({ countOrder }) => {
                   color="textSecondary"
                   gutterBottom
                   variant="overline">
-                  TOTAL ORDERS
+                  TOTAL ADMINS
                 </Typography>
                 <Typography color="textPrimary" variant="h4">
-                  {countOrder ? countOrder : <CircularProgress />}
+                  {admin ? admin : <CircularProgress />}
                 </Typography>
               </Grid>
               <Grid item>
-                <Button onClick={() => history.push("/admin/orders")}>
+                <Button onClick={() => history.push("/admin/users")}>
                   <Avatar
                     sx={{
                       backgroundColor: "success.main",
                       height: 56,
                       width: 56,
                     }}>
-                    <InventoryIcon />
+                    <AdminPanelSettingsIcon />
                   </Avatar>
                 </Button>
               </Grid>
@@ -53,4 +54,4 @@ const TotalOrderItem = ({ countOrder }) => {
   );
 };
 
-export default TotalOrderItem;
+export default TotalAdmin;

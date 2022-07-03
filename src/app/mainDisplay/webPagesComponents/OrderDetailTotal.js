@@ -1,9 +1,50 @@
-import { Button } from "@mui/material";
-import React from "react";
+import { PayPalButton } from "react-paypal-button-v2";
+
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { formatPrice } from "../../../utils/helpers";
+import { useOrderPay } from "../hooks/api/useOrderApi";
+import { Button } from "@mui/material";
 
-const OrderDetailTotal = ({ total_amount, tax_fee, total, shipping_fee }) => {
+const OrderDetailTotal = ({
+  total_amount,
+  tax_fee,
+  total,
+  shipping_fee,
+  paid,
+  id,
+  delivered,
+}) => {
+  const [sdkReady, setSdkReady] = useState(false);
+  const { mutate: payMutate } = useOrderPay({});
+
+  useEffect(() => {
+    const addPayPalScript = async () => {
+      const { data: clientId } = await axios.get("/api/config/paypal");
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+      script.async = true;
+      script.onload = () => {
+        setSdkReady(true);
+      };
+      document.body.appendChild(script);
+    };
+
+    if (!window.paypal) {
+      addPayPalScript();
+    } else {
+      setSdkReady(true);
+    }
+  }, []);
+  const successPaymentHandler = (paymentResult) => {
+    const formData = {
+      orderId: id,
+      paymentResult: paymentResult,
+    };
+    payMutate(formData);
+  };
   return (
     <div>
       <div>
@@ -24,13 +65,33 @@ const OrderDetailTotal = ({ total_amount, tax_fee, total, shipping_fee }) => {
                 Total :<span>{formatPrice(total)}</span>
               </h4>
             </article>
-            <Button
-              variant="contained"
-              id="payButton"
-              color="error"
-              className="btn">
-              Pay
-            </Button>
+            {!paid ? (
+              <PayPalButton
+                id="payButton"
+                amount={total}
+                onSuccess={successPaymentHandler}
+              />
+            ) : !delivered ? (
+              <>
+                <Button
+                  variant="contained"
+                  color="error"
+                  disabled
+                  className="btn">
+                  Already Paid Ready To Be Delivered
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  variant="contained"
+                  color="error"
+                  disabled
+                  className="btn">
+                  Already Delivered
+                </Button>
+              </>
+            )}
           </div>
         </Wrapper>
       </div>

@@ -46,6 +46,9 @@ const OrderItem = () => {
         <ShippingColumn />
         <ShippingItem {...shipping} />
         <hr />
+        <br />
+        Payment Method: {payment}
+        <hr />
         <OrderTotal
           total_amount={subtotal}
           tax_fee={taxPrice}

@@ -11,7 +11,6 @@ import ShippingItem from "../webPagesComponents/ShippingItem";
 
 const SingleOrderPage = () => {
   const { id } = useParams();
-  console.log(id);
   const { data, isLoading, isError } = useGetOrderById(id);
   const subtotal = data?.orderItems.reduce(
     (acc, item) => acc + item.price * item.countInStock,
@@ -44,6 +43,9 @@ const SingleOrderPage = () => {
           tax_fee={data?.taxPrice}
           total={data?.totalPrice}
           shipping_fee={data?.shippingPrice}
+          id={id}
+          paid={data?.isPaid}
+          delivered={data?.isDelivered}
         />
       </Wrapper>
     </div>

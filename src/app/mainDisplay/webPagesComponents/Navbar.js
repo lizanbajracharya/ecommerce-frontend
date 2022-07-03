@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "../../../assets/vecteezy_cute-kawaii-portable-game-console-vector-illustration_7062890.jpg";
+import logo from "../../../assets/278476860_1054900385131240_1927061699962556838_n.png";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { links } from "../../../utils/constants";

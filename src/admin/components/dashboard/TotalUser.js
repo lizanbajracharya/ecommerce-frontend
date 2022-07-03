@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Avatar,
+  Button,
   Card,
   CardContent,
   Grid,
@@ -9,8 +10,10 @@ import {
 } from "@mui/material";
 import PeopleIcon from "@mui/icons-material/PeopleOutlined";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useHistory } from "react-router-dom";
 
 const TotalUser = ({ user }) => {
+  const history = useHistory();
   return (
     <Paper elevation={24}>
       <Card>
@@ -25,14 +28,16 @@ const TotalUser = ({ user }) => {
               </Typography>
             </Grid>
             <Grid item>
-              <Avatar
-                sx={{
-                  backgroundColor: "success.main",
-                  height: 56,
-                  width: 56,
-                }}>
-                <PeopleIcon />
-              </Avatar>
+              <Button onClick={() => history.push("/admin/users")}>
+                <Avatar
+                  sx={{
+                    backgroundColor: "success.main",
+                    height: 56,
+                    width: 56,
+                  }}>
+                  <PeopleIcon />
+                </Avatar>
+              </Button>
             </Grid>
           </Grid>
         </CardContent>

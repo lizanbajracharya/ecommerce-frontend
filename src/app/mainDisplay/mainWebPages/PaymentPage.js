@@ -16,7 +16,7 @@ const PaymentPage = () => {
   const history = useHistory();
   const handleNext = () => {
     history.push("/order");
-    localStorage.setItem("paymentMethod", "cod");
+    localStorage.setItem("paymentMethod", "paypal");
   };
   return (
     <div
@@ -43,11 +43,11 @@ const PaymentPage = () => {
                     control={<Radio />}
                     label="Paypal"
                   />
-                  <FormControlLabel
+                  {/* <FormControlLabel
                     value="cod"
                     control={<Radio />}
                     label="Cash On Delivery"
-                  />
+                  /> */}
                 </RadioGroup>
               </FormControl>
             </Grid>

@@ -1,16 +1,21 @@
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUpdateUserProfile } from "../api/useUser";
 import { userProfileSchema } from "./userValidationSchema";
 
 export const useUserUpdate = (data) => {
   const { mutate } = useUpdateUserProfile({});
   const [edit, setEdit] = useState(false);
+  const [image, setImage] = useState();
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [confirm, setConfirm] = useState("");
   const [validation, setValidation] = useState("");
+
+  useEffect(() => {
+    setImage(data && data?.image);
+  }, [data]);
 
   const handleShowPassword = () => {
     if (showPassword) {
@@ -47,6 +52,10 @@ export const useUserUpdate = (data) => {
     initialValues: {
       name: data?.name,
       email: data?.email,
+      address: data?.address,
+      country: data?.country,
+      city: data?.city,
+      phone: data?.phone,
     },
     enableReinitialize: true,
     validationSchema: userProfileSchema,
@@ -62,6 +71,7 @@ export const useUserUpdate = (data) => {
       if (password === confirm) {
         const formData = {
           ...values,
+          image: image,
           password: password,
         };
         mutate(formData);
@@ -69,7 +79,11 @@ export const useUserUpdate = (data) => {
         setValidation("Password does not match");
       }
     } else {
-      mutate(values);
+      const formData = {
+        ...values,
+        image: image,
+      };
+      mutate(formData);
     }
   };
 
@@ -87,5 +101,6 @@ export const useUserUpdate = (data) => {
     validation,
     showPassword,
     showConfirmPassword,
+    setImage,
   };
 };

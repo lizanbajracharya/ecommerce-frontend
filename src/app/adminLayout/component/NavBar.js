@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Box,
@@ -15,7 +15,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import PasswordIcon from "@mui/icons-material/Password";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useHistory } from "react-router-dom";
+import { useGetUserProfile } from "../../mainDisplay/hooks/api/useUser";
+import UpdatePasswordForm from "../../mainDisplay/webPagesComponents/UpdatePassword/UpdatePasswordForm";
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -24,17 +25,22 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
 
 const NavBar = (props) => {
   const [anchorElUser, setAnchorElUser] = React.useState();
-  const { onSidebarOpen, ...other } = props;
+  const { data } = useGetUserProfile();
 
-  const history = useHistory();
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const { onSidebarOpen, ...other } = props;
 
   function signOutClicked() {
     localStorage.removeItem("loginInfo");
     window.location.href = "/home";
-  }
-
-  function changePassword() {
-    history.push("changepassword");
   }
 
   const handleOpenUserMenu = (event) => {
@@ -99,7 +105,7 @@ const NavBar = (props) => {
               onClose={handleCloseUserMenu}>
               <MenuItem onClick={handleCloseUserMenu}>
                 <Typography textAlign="center">
-                  <IconButton onClick={changePassword} sx={{ p: 0 }}>
+                  <IconButton onClick={handleOpen} sx={{ p: 0 }}>
                     <PasswordIcon sx={{ mr: 2 }} />
                     <span style={{ fontSize: "15px" }}>Change Password</span>
                   </IconButton>
@@ -117,6 +123,7 @@ const NavBar = (props) => {
           </Box>
         </Toolbar>
       </DashboardNavbarRoot>
+      <UpdatePasswordForm open={open} handleClose={handleClose} data={data} />
     </>
   );
 };

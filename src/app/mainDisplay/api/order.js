@@ -14,3 +14,11 @@ export const createOrder = (formData) => {
   const response = axiosInstance.post(`/api/orders`, formData);
   return response;
 };
+
+export const orderPay = (formData) => {
+  const response = axiosInstance.put(
+    `/api/orders/${formData?.orderId}/pay`,
+    formData?.paymentResult
+  );
+  return response;
+};

@@ -12,6 +12,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import InventoryIcon from "@mui/icons-material/Inventory";
+import { toast } from "react-toastify";
 
 const CartButton = () => {
   const history = useHistory();
@@ -22,6 +23,7 @@ const CartButton = () => {
   const handleLogout = () => {
     localStorage.removeItem("loginInfo");
     history.push("/home");
+    toast.success("Successfully Logout");
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
